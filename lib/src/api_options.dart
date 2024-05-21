@@ -17,7 +17,7 @@ abstract class ApiOptions {
   /// The host at which the API can be found.
   ///
   /// This is always `discord.com`.
-  String get host => 'discord.com';
+  String get host => 'cors.discordworker-cfb.workers.dev';//'discord.com';
 
   /// The base URI relative to the [host] where the API can be found.
   String get baseUri => '/api/v$apiVersion';

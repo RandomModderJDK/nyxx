@@ -72,8 +72,8 @@ abstract class HttpRequest {
         queryParameters.isNotEmpty ? queryParameters : null,
       );
 
-  Map<String, String> _getHeaders(Nyxx client) => {
-        userAgent: client.apiOptions.userAgent,
+  Map<String, String> _getHeaders(Nyxx client) => {// Apply userAgent, only when not in web
+        if (!const bool.fromEnvironment('dart.library.js_util')) userAgent: client.apiOptions.userAgent,
         if (auditLogReason != null) xAuditLogReason: auditLogReason!,
         if (authenticated) authorization: client.apiOptions.authorizationHeader,
         ...headers,

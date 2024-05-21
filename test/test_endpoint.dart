@@ -29,7 +29,7 @@ Future<void> testEndpoint(
 
       final interceptor = Interceptor(RequestMatcher(
         method,
-        UriMatcher('https://discord.com/api/v${client.apiOptions.apiVersion}', endpointMatcher),
+        UriMatcher('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}', endpointMatcher),
         BodyMatcher((_, __) => true),
       ))
         ..reply(400, jsonEncode({'message': 'Intentional testing error', 'code': -1}));
@@ -47,7 +47,7 @@ Future<void> testEndpoint(
 
       final interceptor = Interceptor(RequestMatcher(
         method,
-        UriMatcher('https://discord.com/api/v${client.apiOptions.apiVersion}', endpointMatcher),
+        UriMatcher('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}', endpointMatcher),
         BodyMatcher((_) => true),
       ))
         ..reply(200, jsonEncode(response));

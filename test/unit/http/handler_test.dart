@@ -31,7 +31,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        final interceptor = nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test')..reply(200, jsonEncode({'message': 'success'}));
+        final interceptor = nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test')..reply(200, jsonEncode({'message': 'success'}));
 
         final route = HttpRoute()..test();
         final request = BasicRequest(route);
@@ -50,7 +50,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        final scope = nock('https://discord.com/api/v${client.apiOptions.apiVersion}');
+        final scope = nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}');
         final successInterceptor = scope.get('/succeed')..reply(200, jsonEncode({'message': 'success'}));
         final failureInterceptor = scope.get('/fail')..reply(400, jsonEncode({'message': 'failure'}));
 
@@ -74,7 +74,7 @@ void main() {
       when(() => client.options).thenReturn(RestClientOptions());
       final handler = HttpHandler(client);
 
-      nock('https://discord.com/api/v${client.apiOptions.apiVersion}')
+      nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}')
         ..get('/succeed').reply(200, jsonEncode({'message': 'success'}))
         ..get('/fail').reply(400, jsonEncode({'message': 'failure'}));
 
@@ -92,7 +92,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
           200,
           jsonEncode({'message': 'success'}),
           headers: {
@@ -118,7 +118,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
           200,
           jsonEncode({'message': 'success'}),
           headers: {
@@ -136,7 +136,7 @@ void main() {
 
         // Only add handler after 4 seconds. If the second request runs before this, an error will be thrown.
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -159,7 +159,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
           429,
           jsonEncode({"message": "You are being rate limited.", "retry_after": 5.0, "global": false}),
           headers: {
@@ -174,7 +174,7 @@ void main() {
         final request = BasicRequest(HttpRoute()..test());
 
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -208,7 +208,7 @@ void main() {
         when(() => client.options).thenReturn(RestClientOptions());
         final handler = HttpHandler(client);
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
           429,
           jsonEncode({"message": "You are being rate limited.", "retry_after": 5.0, "global": true}),
           headers: {
@@ -223,7 +223,7 @@ void main() {
         final request = BasicRequest(HttpRoute()..test());
 
         Timer(const Duration(seconds: 4), () {
-          nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+          nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
             200,
             jsonEncode({'message': 'success'}),
             headers: {
@@ -261,7 +261,7 @@ void main() {
           Timer(duration, () {
             // Accept 5 requests
             for (int i = 0; i < 5; i++) {
-              nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get('/test').reply(
+              nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get('/test').reply(
                 200,
                 jsonEncode({'message': 'success'}),
                 headers: {
