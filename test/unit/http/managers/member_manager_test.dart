@@ -23,7 +23,8 @@ final sampleMember = {
   "user": sampleUser,
 };
 
-void checkMemberNoUser(Member member, {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
+void checkMemberNoUser(Member member, {Snowflake? expectedUserId}) {
+  expectedUserId ??= Snowflake.parse("80351110224678912");
   expect(member.id, equals(expectedUserId));
   expect(member.nick, equals('NOT API SUPPORT'));
   expect(member.avatarHash, isNull);
@@ -39,7 +40,8 @@ void checkMemberNoUser(Member member, {Snowflake expectedUserId = const Snowflak
   expect(member.bannerHash, equals('a_coolHashDude'));
 }
 
-void checkMember(Member member, {Snowflake expectedUserId = const Snowflake(80351110224678912)}) {
+void checkMember(Member member, {Snowflake? expectedUserId}) {
+  expectedUserId ??= Snowflake.parse("80351110224678912");
   checkMemberNoUser(member, expectedUserId: expectedUserId);
 
   expect(member.user, isNotNull);

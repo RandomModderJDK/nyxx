@@ -125,7 +125,7 @@ Future<void> testReadOnlyManager<T extends ManagedSnowflakeEntity<T>, U extends 
       when(() => client.options).thenReturn(RestClientOptions());
       when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-      nock('https://discord.com/api/v${client.apiOptions.apiVersion}').get(baseUrlMatcher).reply(200, jsonEncode(fetchObjectOverride ?? sampleObject));
+      nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').get(baseUrlMatcher).reply(200, jsonEncode(fetchObjectOverride ?? sampleObject));
 
       final manager = create(CacheConfig(), client);
       final entity = await manager.fetch(Snowflake(1));
@@ -220,7 +220,7 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
 
         Interceptor(RequestMatcher(
           createMethod,
-          UriMatcher('https://discord.com/api/v${client.apiOptions.apiVersion}', createUrlMatcher),
+          UriMatcher('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}', createUrlMatcher),
           BodyMatcher((_, __) => true),
         )).reply(200, jsonEncode(sampleObject));
 
@@ -251,7 +251,7 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
         when(() => client.options).thenReturn(RestClientOptions());
         when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').patch(baseUrlMatcher, (_) => true).reply(200, jsonEncode(sampleObject));
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').patch(baseUrlMatcher, (_) => true).reply(200, jsonEncode(sampleObject));
 
         final manager = create(CacheConfig(), client);
         final entity = await manager.update(Snowflake(1), updateBuilder);
@@ -277,7 +277,7 @@ Future<void> testManager<T extends WritableSnowflakeEntity<T>, U extends Manager
         when(() => client.options).thenReturn(RestClientOptions());
         when(() => client.httpHandler).thenReturn(HttpHandler(client));
 
-        nock('https://discord.com/api/v${client.apiOptions.apiVersion}').delete(baseUrlMatcher).reply(200, jsonEncode(sampleObject));
+        nock('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}').delete(baseUrlMatcher).reply(200, jsonEncode(sampleObject));
 
         final manager = create(CacheConfig(), client);
         final entity = manager.parse(sampleObject);

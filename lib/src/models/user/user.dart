@@ -115,8 +115,8 @@ class User extends PartialUser implements MessageAuthor, CommandOptionMentionabl
 
   /// This user's default avatar.
   CdnAsset get defaultAvatar {
-    final parsedDiscriminator = int.tryParse(discriminator);
-    final hash = parsedDiscriminator == null || parsedDiscriminator == 0 ? (id.value >> 22) % 6 : parsedDiscriminator % 5;
+    final parsedDiscriminator = BigInt.tryParse(discriminator);
+    final hash = parsedDiscriminator == null || parsedDiscriminator == 0 ? (id.value >> 22) % BigInt.from(6) : parsedDiscriminator.modInverse(BigInt.from(5));
 
     return CdnAsset(
       client: manager.client,

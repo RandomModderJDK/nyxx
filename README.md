@@ -1,3 +1,5 @@
+Made web possible, by using a cors proxy. This is NOT encouraged, but it works (in many cases). The code is really janky, so don't expect too much.
+
 # nyxx
 
 [![Discord](https://discordapp.com/api/guilds/846136758470443069/widget.png?style=shield)](https://discord.gg/nyxx)

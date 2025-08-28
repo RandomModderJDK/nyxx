@@ -13,14 +13,14 @@ void main() {
 
         final request = BasicRequest(HttpRoute()..add(HttpRoutePart('test'))).prepare(client);
 
-        expect(request.url, equals(Uri.parse('https://discord.com/api/v${client.apiOptions.apiVersion}/test')));
+        expect(request.url, equals(Uri.parse('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}/test')));
 
         final request2 = BasicRequest(
           HttpRoute()..add(HttpRoutePart('test')),
           queryParameters: {'foo': 'bar'},
         ).prepare(client);
 
-        expect(request2.url, equals(Uri.parse('https://discord.com/api/v${client.apiOptions.apiVersion}/test?foo=bar')));
+        expect(request2.url, equals(Uri.parse('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}/test?foo=bar')));
       });
 
       test('has correct headers', () {
@@ -65,7 +65,7 @@ void main() {
 
         final request = MultipartRequest(HttpRoute()..add(HttpRoutePart('test'))).prepare(client);
 
-        expect(request.url, equals(Uri.parse('https://discord.com/api/v${client.apiOptions.apiVersion}/test')));
+        expect(request.url, equals(Uri.parse('https://${client.apiOptions.host}/api/v${client.apiOptions.apiVersion}/test')));
       });
 
       test('has correct headers', () {

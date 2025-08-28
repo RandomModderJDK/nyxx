@@ -4,21 +4,21 @@ import 'package:test/test.dart';
 void main() {
   group('Snowflake', () {
     test('zero has correct value', () {
-      expect(Snowflake.zero.value, isZero);
+      expect(Snowflake.zero.value.toInt(), isZero);
       expect(Snowflake.zero.isZero, isTrue);
     });
 
     test('structure is parsed correctly', () {
-      const snowflake = Snowflake(175928847299117063);
+      var snowflake = Snowflake.parse("175928847299117063");
 
-      expect(snowflake.increment, equals(7));
-      expect(snowflake.processId, equals(0));
-      expect(snowflake.workerId, equals(1));
-      expect(snowflake.millisecondsSinceEpoch, equals(41944705796));
+      expect(snowflake.increment.toInt(), equals(7));
+      expect(snowflake.processId.toInt(), equals(0));
+      expect(snowflake.workerId.toInt(), equals(1));
+      expect(snowflake.millisecondsSinceEpoch.toInt(), equals(41944705796));
     });
 
     test('timestamp is parsed correctly', () {
-      const snowflake = Snowflake(175928847299117063);
+      var snowflake = Snowflake.parse("175928847299117063");
 
       expect(snowflake.timestamp, DateTime.utc(2016, 04, 30, 11, 18, 25, 796));
     });
@@ -39,9 +39,9 @@ void main() {
     test('now', () {
       final snowflake = Snowflake.now();
 
-      expect(snowflake.increment, isZero);
-      expect(snowflake.processId, isZero);
-      expect(snowflake.workerId, isZero);
+      expect(snowflake.increment.toInt(), isZero);
+      expect(snowflake.processId.toInt(), isZero);
+      expect(snowflake.workerId.toInt(), isZero);
 
       expect(snowflake.timestamp.millisecondsSinceEpoch, closeTo(DateTime.now().millisecondsSinceEpoch, 500));
     });
