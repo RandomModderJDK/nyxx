@@ -207,7 +207,7 @@ void checkInteractionCallbackResponse(InteractionCallbackResponse interactionCal
 
 void checkInteractionCallback(InteractionCallback interactionCallback) {
   expect(interactionCallback.activityInstanceId, equals('SomeRandomId'));
-  expect(interactionCallback.id, equals(const Snowflake(123456789123456789)));
+  expect(interactionCallback.id, equals(Snowflake(123456789123456789)));
   expect(interactionCallback.responseMessageEphemeral, equals(true));
   expect(interactionCallback.responseMessageLoading, equals(true));
 }

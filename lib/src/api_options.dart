@@ -2,7 +2,6 @@ import 'package:nyxx/src/builders/presence.dart';
 import 'package:nyxx/src/intents.dart';
 import 'package:nyxx/src/utils/flags.dart';
 import 'package:oauth2/oauth2.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 /// Options for connecting to the Discord API.
 abstract class ApiOptions {
@@ -18,7 +17,7 @@ abstract class ApiOptions {
   /// The host at which the API can be found.
   ///
   /// This is always `discord.com`.
-  String get host => UniversalPlatform.isWeb ? 'cors2.discordworker-cfb.workers.dev' : "discord.com";//'discord.com'; cors.discordworker-cfb.workers.dev
+  String get host => const bool.fromEnvironment('dart.library.js_util') ? 'cors2.discordworker-cfb.workers.dev' : "discord.com";//'discord.com'; cors.discordworker-cfb.workers.dev
 
   /// The base URI relative to the [host] where the API can be found.
   String get baseUri => '/api/v$apiVersion';
